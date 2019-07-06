@@ -1,0 +1,541 @@
+[
+    {
+        "id": "cca68cdd.adbed",
+        "type": "tab",
+        "label": "Cobra-netio.json",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "96fea735.c12f88",
+        "type": "http request",
+        "z": "cca68cdd.adbed",
+        "name": "http POST",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://10.0.0.5/netio.json",
+        "tls": "",
+        "x": 437.9336814880371,
+        "y": 40.88444900512695,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ce5045a.9ae94c",
+        "type": "json",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 434.16661834716797,
+        "y": 128.33332061767578,
+        "wires": [
+            [
+                "2a5b9c13.fec504"
+            ]
+        ]
+    },
+    {
+        "id": "276d540f.b5d17c",
+        "type": "function",
+        "z": "cca68cdd.adbed",
+        "name": "\"Action\": 1",
+        "func": "msg.payload={\n \"Outputs\": [{\n  \"ID\": 1,\n  \"Action\": 1\n }]\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 232.16668319702148,
+        "y": 22.000001907348633,
+        "wires": [
+            [
+                "96fea735.c12f88"
+            ]
+        ]
+    },
+    {
+        "id": "880f772f.53e748",
+        "type": "function",
+        "z": "cca68cdd.adbed",
+        "name": "\"Action\": 0",
+        "func": "msg.payload={\n \"Outputs\": [{\n  \"ID\": 1,\n  \"Action\": 0\n }]\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 231.16669082641602,
+        "y": 61.00000190734863,
+        "wires": [
+            [
+                "96fea735.c12f88"
+            ]
+        ]
+    },
+    {
+        "id": "523c0deb.c56014",
+        "type": "http request",
+        "z": "cca68cdd.adbed",
+        "name": "http GET",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://10.0.0.5/netio.json",
+        "tls": "",
+        "x": 271.99999237060547,
+        "y": 127.99998664855957,
+        "wires": [
+            [
+                "6ce5045a.9ae94c"
+            ]
+        ]
+    },
+    {
+        "id": "63b4e6e9.0eede8",
+        "type": "inject",
+        "z": "cca68cdd.adbed",
+        "name": "timer 5s",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 104.16665649414062,
+        "y": 127.9999828338623,
+        "wires": [
+            [
+                "523c0deb.c56014"
+            ]
+        ]
+    },
+    {
+        "id": "2a5b9c13.fec504",
+        "type": "function",
+        "z": "cca68cdd.adbed",
+        "name": "Output1",
+        "func": "msg.payload=msg.payload.Outputs[0]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 567.1665573120117,
+        "y": 128.66665267944336,
+        "wires": [
+            [
+                "25e8221c.54d64e",
+                "2abc82ac.f7375e",
+                "8c501c71.2c475",
+                "e324de76.a6443",
+                "3a6e19a6.989d06"
+            ]
+        ]
+    },
+    {
+        "id": "25e8221c.54d64e",
+        "type": "function",
+        "z": "cca68cdd.adbed",
+        "name": "Current/1000",
+        "func": "msg.payload=msg.payload.Current/1000\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730.1666107177734,
+        "y": 47.66665077209473,
+        "wires": [
+            [
+                "e2799293.abfb6",
+                "b81f716c.8354a"
+            ]
+        ]
+    },
+    {
+        "id": "6c24afa1.e4e61",
+        "type": "ui_button",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "group": "4e50dbaa.ffb424",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 77.16666412353516,
+        "y": 22.333335876464844,
+        "wires": [
+            [
+                "276d540f.b5d17c"
+            ]
+        ]
+    },
+    {
+        "id": "a71353f4.00209",
+        "type": "ui_button",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "group": "4e50dbaa.ffb424",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 78,
+        "y": 60.999996185302734,
+        "wires": [
+            [
+                "880f772f.53e748"
+            ]
+        ]
+    },
+    {
+        "id": "e2799293.abfb6",
+        "type": "ui_gauge",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "group": "ed6875ef.8ae458",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Amper",
+        "label": "A",
+        "format": "{{value | number:2}}",
+        "min": 0,
+        "max": "10",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 894.1666145324707,
+        "y": 23.999980926513672,
+        "wires": []
+    },
+    {
+        "id": "b81f716c.8354a",
+        "type": "ui_chart",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "group": "ed6875ef.8ae458",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "10",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 892.1666145324707,
+        "y": 65.99998092651367,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "2abc82ac.f7375e",
+        "type": "function",
+        "z": "cca68cdd.adbed",
+        "name": "Load",
+        "func": "msg.payload=msg.payload.Load\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 744.9999618530273,
+        "y": 135.99998474121094,
+        "wires": [
+            [
+                "1925c2ee.a24e6d",
+                "640c7454.ec8e4c"
+            ]
+        ]
+    },
+    {
+        "id": "1925c2ee.a24e6d",
+        "type": "ui_gauge",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "group": "60090635.418c78",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Load",
+        "label": "W",
+        "format": "{{value | number:0}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 889.9999313354492,
+        "y": 117.99997329711914,
+        "wires": []
+    },
+    {
+        "id": "640c7454.ec8e4c",
+        "type": "ui_chart",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "group": "60090635.418c78",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1000",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 887.9999313354492,
+        "y": 159.99997329711914,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "8c501c71.2c475",
+        "type": "function",
+        "z": "cca68cdd.adbed",
+        "name": "Power factor",
+        "func": "msg.payload=msg.payload.PowerFactor\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 733.9999351501465,
+        "y": 227.99995803833008,
+        "wires": [
+            [
+                "bf0b55b.03bc5a8",
+                "307d5f70.8aedc"
+            ]
+        ]
+    },
+    {
+        "id": "bf0b55b.03bc5a8",
+        "type": "ui_gauge",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "group": "f4f3edff.df2fc",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Power factor",
+        "label": "factor",
+        "format": "{{value | number:2}}",
+        "min": "0.5",
+        "max": "1.5",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 908.9999198913574,
+        "y": 205.99996185302734,
+        "wires": []
+    },
+    {
+        "id": "307d5f70.8aedc",
+        "type": "ui_chart",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "group": "f4f3edff.df2fc",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0.5",
+        "ymax": "1.5",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 886.9999198913574,
+        "y": 247.99996185302734,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e324de76.a6443",
+        "type": "function",
+        "z": "cca68cdd.adbed",
+        "name": "state",
+        "func": "msg.payload=msg.payload.State\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 671.0115165710449,
+        "y": 289.0277442932129,
+        "wires": [
+            [
+                "ccffb46d.62be78"
+            ]
+        ]
+    },
+    {
+        "id": "ccffb46d.62be78",
+        "type": "ui_text_input",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "label": "Output last state",
+        "tooltip": "",
+        "group": "4e50dbaa.ffb424",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "",
+        "x": 842.2453422546387,
+        "y": 290.4097194671631,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3a6e19a6.989d06",
+        "type": "debug",
+        "z": "cca68cdd.adbed",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 478.2453918457031,
+        "y": 224.58798217773438,
+        "wires": []
+    },
+    {
+        "id": "4e50dbaa.ffb424",
+        "type": "ui_group",
+        "z": "",
+        "name": "Control",
+        "tab": "f17901f.ef7dc",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "ed6875ef.8ae458",
+        "type": "ui_group",
+        "z": "",
+        "name": "Current",
+        "tab": "f17901f.ef7dc",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "60090635.418c78",
+        "type": "ui_group",
+        "z": "",
+        "name": "Load",
+        "tab": "f17901f.ef7dc",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "f4f3edff.df2fc",
+        "type": "ui_group",
+        "z": "",
+        "name": "Power factor",
+        "tab": "f17901f.ef7dc",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "f17901f.ef7dc",
+        "type": "ui_tab",
+        "z": "",
+        "name": "CobraOutput1-netio.json",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
